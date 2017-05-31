@@ -5,7 +5,7 @@ from blockchain import BlockChainPacket
 def test():
     
     p = BlockChainPacket()
-    p.message = "should OK"
+    p.payload = "should OK"
 
     with Benchmark('p1 mine') as _:
         p.mine()
@@ -14,7 +14,7 @@ def test():
     out.flush()
 
     p2 = p.next()
-    p2.message = 'should OK'
+    p2.payload = 'should OK'
     
     with Benchmark('p2 mine') as _:
         p2.mine()
@@ -23,12 +23,12 @@ def test():
     out.flush()
     
 
-    p2.message = "should FAIL, not mined packet"
+    p2.payload = "should FAIL, not mined packet"
     p2.writeToOut()
     out.flush()
     
 
-    p2.message = 'should OK, remined'
+    p2.payload = 'should OK, remined'
     with Benchmark('p2 remine') as _:
         p2.mine()
     p2.writeToOut()
@@ -36,7 +36,7 @@ def test():
     
 
     p3 = p2.next()
-    p3.message = '''
+    p3.payload = '''
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget gravida orci.
 Etiam mattis, nibh ut scelerisque elementum, leo lorem dictum arcu, sit amet faucibus nunc augue at velit.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget fringilla arcu. Curabitur posuere nibh quam,

@@ -7,7 +7,7 @@ class BlockChainPacket:
     def __init__(self,previous_hash: str = '', blockchain_hash_prefix: str = 'bd0f'):
         self._blockchain_hash_prefix = blockchain_hash_prefix
         self.order = 0
-        self.message = ''
+        self.payload : str = ''
         self.flood = 0
         self.previous_hash = previous_hash
         self.current_hash = ''
@@ -27,7 +27,7 @@ class BlockChainPacket:
         return True if self.current_hash == sha256(str(self).encode()).hexdigest() and self.isMined() else False
 
     def __str__(self):
-        return f'xo:{self.order} xp:{self.previous_hash} xf:{self.flood} xm:{self.message}'
+        return f'xo:{self.order} xph:{self.previous_hash} xf:{self.flood} xp:{self.payload}'
 
     def writeToOut(self):
         print(f'{"OK  " if self.isCorrect() else "FAIL"}\t{self.current_hash} -> {str(self)}')
